@@ -7,17 +7,19 @@ import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import dax.AbstractConnection;
+
 
 public class DatabaseConnection {
 	private String table;
-	private Connection conn = null;
+	private AbstractConnection conn = null;
 	private Statement stmt;
 	private ResultSet rs;
 	public DatabaseConnection(String table, String URL, String driver, String user, String passwd){
 		this.table = table;
 		try{
 			Class.forName(driver);
-			conn = DriverManager.getConnection(URL, user,passwd);
+			conn = new AbstractConnection(() -> DriverManager.getConnection(URL, user,passwd));
 			stmt = conn.createStatement();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(new JFrame(), "Error Connecting to Database"); 
