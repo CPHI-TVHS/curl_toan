@@ -27,6 +27,11 @@ public class AbstractResultSet implements ResultSet {
 
 	ResultSet _resultSet;
 
+	/**
+	 * 
+	 * @param resultSetCreate
+	 * @throws SQLException
+	 */
 	public AbstractResultSet(Callable<ResultSet> resultSetCreate) throws SQLException {
 		try {
 			_resultSet = resultSetCreate.call();
@@ -40,6 +45,9 @@ public class AbstractResultSet implements ResultSet {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public boolean absolute(int row) throws SQLException {
 		return _resultSet.absolute(row);
@@ -372,8 +380,8 @@ public class AbstractResultSet implements ResultSet {
 
 	@Override
 	public Object getObject(int columnIndex) throws SQLException {
-		return _resultSet.getObject(columnIndex);
-
+		//return _resultSet.getObject(columnIndex);
+		throw new SQLException("Oracle JDBC does not implement this method well in all versions");
 	}
 
 	@Override
