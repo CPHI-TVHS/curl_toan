@@ -8,11 +8,13 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import dax.AbstractConnection;
+import dax.AbstractResultSet;
+import dax.AbstractStatement;
 
 
 public class DatabaseConnection {
 	private String table;
-	private AbstractConnection conn = null;
+	private Connection conn = null;
 	private Statement stmt;
 	private ResultSet rs;
 	public DatabaseConnection(String table, String URL, String driver, String user, String passwd){
@@ -20,7 +22,7 @@ public class DatabaseConnection {
 		try{
 			Class.forName(driver);
 			conn = new AbstractConnection(() -> DriverManager.getConnection(URL, user,passwd));
-			stmt = conn.createStatement();
+			stmt = new AbstractStatement(() -> conn.createStatement());
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(new JFrame(), "Error Connecting to Database"); 
 			e.printStackTrace();

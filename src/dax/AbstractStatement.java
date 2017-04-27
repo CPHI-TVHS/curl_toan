@@ -185,9 +185,9 @@ public class AbstractStatement implements  java.sql.Statement{
 	}
 
 	@Override
-	public ResultSet getResultSet() throws SQLException {
+	public AbstractResultSet getResultSet() throws SQLException {
 		
-		return _statement.getResultSet();
+		return new AbstractResultSet(() -> _statement.getResultSet());
 	}
 
 	@Override
