@@ -1,0 +1,22 @@
+version: "3"
+services:
+  curl-honestbroker-db:
+    image: cudd2v/curl-honestbroker-db:0.0.8-SNAPSHOT
+    ports:
+     - 5435:5432
+    volumes:
+     - curl-honestbroker-db:/var/lib/postgresql/data
+
+  curl-honestbroker-app:
+    image: cudd2v/curl-honestbroker:0.0.8-SNAPSHOT
+    command: sh -c '/app/wait-for curl-honestbroker-db:5432 -- java -jar curl-honestbroker.jar'
+    depends_on:
+      - curl-honestbroker-db
+    ports:
+     - 8050:8080
+    volumes:
+     - curl-honestbroker:/curl-honestbroker
+
+volumes:
+  curl-honestbroker-db:
+  curl-honestbroker:
