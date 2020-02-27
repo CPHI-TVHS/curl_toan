@@ -107,3 +107,7 @@ nbdist/
 .nb-gradle/
 
 # End of https://www.gitignore.io/api/java,eclipse,netbeans
+/installs/CURLHonestBroker/docker
+/installs/CURLHonestBroker/jar
+/installs/CURLHonestBroker/.DS_Store
+/installs/CURLHonestBroker/pSCANNER-NWI.1409.7.honestbroker.json
